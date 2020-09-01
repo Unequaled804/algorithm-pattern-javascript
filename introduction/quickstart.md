@@ -15,21 +15,28 @@
 
 - 思路：核心点遍历给定字符串字符，判断以当前字符开头字符串是否等于目标字符串
 
-```Python
-class Solution:
-    def strStr(self, haystack: str, needle: str) -> int:
-        L, n = len(needle), len(haystack)
+```javascript
 
-        for start in range(n - L + 1):
-            if haystack[start:start + L] == needle:
-                return start
-        return -1
+var strStr = function(haystack, needle) {
+    let [len, sublen] = [haystack.length, needle.length];
+    if (sublen === 0) {
+        return 0;
+    }
+    for (let i = 0; i <= len - sublen; i++) {
+        if (haystack.substring(i, i + sublen) === needle) {
+            return i;
+        }
+    }
+    return -1;
+};
+
 ```
 
 需要注意点
 
-- 循环时，i 不需要到 len-1
-- 如果找到目标字符串，len(needle) == j
+- 循环时，i 到 `len - sublen` 即可停止
+- 如果找到目标字符串，`haystack.substring(i, i + sublen) === needle`
+- `str.substr(start[, length])`将来可能被废弃，请使用`str.substring(indexStart[, indexEnd])`（详见[MDN String.prototype.substr](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/substr)）
 
 ### [示例 2：subsets](https://leetcode-cn.com/problems/subsets/)
 
@@ -88,7 +95,7 @@ class Solution:
   - 命名尽量简洁明了，尽量不用数字命名如：i1、node1、a1、b2
 - 常见错误总结
   - 访问下标时，不能访问越界
-  - 空值 nil 问题 run time error
+  - 空值 `null` 问题 run time error
 
 ## 练习
 
